@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Registered Summary{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+<h1>Registered Summary</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Application</th>
+      <th>Application Total</th>
+      <th>Api</th>
+      <th>Api Total</th>
+      <th>Resource</th>
+      <th>Resource total</th>
+      <th>Request Started</th>
+      <th>Status Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for summary in result %}
+    <tr>
+      <td>{{ summary.application.name }}</td>
+      <td>{{ summary.application_total }}</td>
+      <td>{{ summary.api.name }}</td>
+      <td>{{ summary.api_total }}</td>
+      <td>{{ summary.resource }}</td>
+      <td>{{ summary.resource_total }}</td>
+      <td>{{ summary.request_started }}</td>
+      <td>{{ summary.owner.name }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

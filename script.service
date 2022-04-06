@@ -1,0 +1,40 @@
+#!/bin/bash 
+start() { 
+	export DBUSER=statistics_admin
+	export DBPASS=xxxxx
+	export DBHOST=localhost
+	export DBNAME=statistics
+	export FLASK_APP=app.py
+	
+	python -m flask run -h 0.0.0.0 -p 5000 >> /var/log/hub-statistics/server.log	xt 2>&1 &
+} 
+stop() { 
+        pkill -f 'python -m flask'
+} 
+status(){ 
+	if [ $(ps -ef | grep -v grep | grep 'python -m flask' | wc -l) > 0 ]; then 
+		echo "Hub Statistics is running." 
+	else 
+		echo "Hub Statistics is not running" 
+	fi 
+} 
+### main logic ### 
+case "$1" in 
+  start) 
+        start 
+	;; 
+  stop) 
+       	stop 
+	;; 
+  status) 
+        status svpn 
+        ;;                                                    
+  restart|reload|condrestart) 
+        stop 
+	start 
+	;; 
+  *) 
+    	echo $"Usage: statistics {start|stop|restart|reload|status}" 
+        exit 1 
+esac 
+exit 0

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+##remember to export
+export DBUSER=postgres
+export DBPASS=postgres
+export DBHOST=localhost
+export DBNAME=hub_statistics
+export FLASK_APP=app.py
+export FLASK_DEBUG=1
+
+python -m flask run -h 0.0.0.0 -p 5000
+

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Registered Summary{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+<h1>Report Saúde de APIs (Mês 10) Top 20</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Owner</th>
+      <th>Aplicação</th>
+      <th>Api</th>
+      <th>Recurso</th>
+      <th>Ambiente</th>
+      <th>Req Total</th>
+      <th>Req Sucesso</th>
+      <th>% Erro</th>
+      <th>HD</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for result in all %}
+    <tr>
+      <td>{{ result.id }}{{ result.owner.name }}</td>
+      <td>{{ result.application.name }}</td>
+      <td>{{ result.api.name }}</td>
+      <td>{{ result.resource }}</td>
+      <td>{{ result.entrypoint.name }}</td>
+      <td>{{ result.resource_total }}</td>
+      <td>{{ s_val }}</td>
+      <td><b><span style="color:red">{{ result.perc_error }}</span></b></td>
+      <td></td>
+    </tr>
+    {% endfor %}
+</table>
+<p class="navbar-btn">
+  Report baseado em mais de 10.000/mês e > 70% erros
+</p>
+{% endblock %}
